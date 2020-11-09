@@ -1,1 +1,75 @@
-<p>question works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="container" *ngIf="!flagAnswers">
+    <label><b>Question {{currentQuestion+1}} out of {{questionList.length}}</b></label>
+    <form>
+      <label>{{questionList[currentQuestion]?.question}}</label>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="questionRadio" value="optionA" id="questionButton" [(ngModel)]="answerQuestion">
+      <label class="form-check-label">
+        {{questionList[currentQuestion]?.optionA}}
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="questionRadio" value="optionB" id="questionButton" [(ngModel)]="answerQuestion">
+      <label class="form-check-label">
+        {{questionList[currentQuestion]?.optionB}}
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="questionRadio" value="optionC" id="questionButton" [(ngModel)]="answerQuestion">
+      <label class="form-check-label">
+        {{questionList[currentQuestion]?.optionC}}
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="questionRadio" value="optionD" [(ngModel)]="answerQuestion">
+      <label class="form-check-label">
+        {{questionList[currentQuestion]?.optionD}}
+      </label>
+    </div>
+    <div class="btn-toolbar" style="margin-top: 20px;">
+      <div class="col-md-1">
+        <input type="button" class="btn btn-secondary"  value="Prev" [disabled]="currentQuestion == 0" (click)="previousQuestion()"/>
+      </div>
+      <div class="col-md-1">
+        <input type="button" class="btn btn-secondary"  value="Next" [disabled]="currentQuestion == (questionList.length-1)" (click)="nextQuestion()"/>    
+      </div>        
+
+    </div>
+    
+    <br/>
+    <br/>
+    <input type="button" style="margin-left: 50px;" class="btn btn-secondary" *ngIf="!flagAnswers" value="Submit" (click)="submitAnswers()"/>
+  </form>
+
+  </div>
+  <div class="container">
+    <div *ngIf="flagAnswers">
+        <h2>Results</h2>
+        <div>
+        <label>Total Questions: {{this.questionList.length}}</label>
+        <br/>
+        <label>Number of correct answers: {{this.correctAnswers}}</label>
+        </div>
+        <h2>Correct Answers</h2>
+        <div *ngFor="let q of correctAnswersList">
+              <label>{{q}}</label>
+        </div>
+    </div>
+  </div>
+
+
+
+    
+</body>
+</html>
+
+      
+
